@@ -1,4 +1,4 @@
-Multiple Linear Regression : DV vs more than 1 IVs
+#Multiple Linear Regression : DV vs more than 1 IVs
 #sales Qty vs price & promotion
 #Predict Sales Qty from Price and Promotion of the Product
 
@@ -16,6 +16,7 @@ head(omni1)
 #omni2 = read.csv(file.choose())
 
 #3rd Method : from gsheet 
+
 library(gsheet)
 url = "https://docs.google.com/spreadsheets/d/1h7HU0X_Q4T5h5D1Q36qoK40Tplz94x_HZYHOJJC_edU/edit#gid=1595306231"
 omni3 = as.data.frame(gsheet::gsheet2tbl(url))
@@ -28,7 +29,6 @@ nrow(omni)
 #MLR  Create Multiple Linear Regression
 # we want to see how Sales Qty depend on Price and Promotion Values
 fit2 = lm(sales ~ price + promotion, data=omni)
-
 # summary statistics of model IMP STEP
 summary(fit2)
 #understand values : R2, AdjR2, Fstats pvalue, Coeff, ***, Residuals
@@ -46,7 +46,11 @@ summary(fit2)
 #promotion  : +3.6 , pvalue = 9.82e-06 < 0.05 ***: Significant
 #keeping price constant, if promotion is increased by 1 unit, salesqty increases by 53 units
 
-
+fitted(fit2)
+?fitted
+omni$sales
+residuals(fit2)
+Summary(residuals(fit2))
 #Predict SalesQty for new combination of Values----
 
 #create a dataframe of new sample values
@@ -55,17 +59,22 @@ p2sales = predict(fit2, newdata=ndata2)
 cbind(ndata2, p2sales)
 
 #Assumptions
+par(mfrow=c(2,2))
 plot(fit2)
+par(mfrow=c(1,1))
 plot(fit2,which=1)  # no pattern, equal variance
 plot(fit2,2)  # Residuals are normally distributed
 plot(fit2,3)  # No hetero-scedascity
 plot(fit2,4)  # tells outliers which affect model
 omni[-c(11,14,15),]
-
+?nrow
 fit3 = lm(sales ~ price + promotion, data=omni[-c(11,14,15),])
+fit3
 plot(fit3,4)
 summary(fit3)
-
+cbind(omni,predict(fit2,newdata=data.frame(omni$price,omni$promotion)))
+cbind(omni,fitted(fit2))
+cbind(omni,fitted(fit2),omni$sales-fitted(fit2),residuals(fit2))
 #End of Multiple Linear Regression
 
 #when variables are large, select only significant variables
@@ -74,6 +83,10 @@ summary(fit3)
 #Dataset can be divided into train(70%) and test(30%) set to check the accuracy
 
 #create model with t
-
-
+get=c(1,2,3)
+get
+get=c(4,6,7)
+get[c(1,2)]
+get[1]
+rbind(get,8,9)
 
