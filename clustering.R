@@ -3,19 +3,23 @@
 
 
 #sample Data
-marks = data.frame(sub1=c(0,1,2,4,5,4,6,7),sub2=c(0,1,2,3,3,4,5,5))
+marks = data.frame(sub1=c(0,1,2,4,5,4,6,7),sub2=c(0,1,2,3,3,4,5,5),sub3=c(8,5,7,8,1,4,2,3))
 km1 = kmeans(marks, center=2)
+km1
 plot(marks,col=km1$cluster,cex=1.5)
 points(km1$center,col=1:2,pch=8,cex=2)
-
+marks
 
 #iris dataset
 
 #Plot1----
+install.packages('fpc')
 library(cluster)
 library(fpc)
-
+iris
 data(iris)
+rm(data)
+data
 data = iris[, -5] # without known classification 
 # Kmeans cluster analysis
 iriskm1 =  kmeans(data, centers=3)
@@ -35,6 +39,7 @@ data = iris[-5]  #remove target column
 head(data)
 
 km1= kmeans(data,centers=1)
+km1
 km1$tot.withinss; km1$withinss
 
 km2= kmeans(data,centers=2)
@@ -53,6 +58,7 @@ km5$tot.withinss;km5$withinss
 km1$tot.withinss; km2$tot.withinss ; km3$tot.withinss ; km4$tot.withinss ; km5$tot.withinss
 
 #Selecting the number of clusters
+
 library(NbClust)
 nc = NbClust(data, distance="euclidean",min.nc=2, max.nc=15, method="average")  
 #avg -  distance Dij between two clusters Ci and Cj is the mean of the distances between the pair of points x and y
