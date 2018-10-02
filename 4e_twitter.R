@@ -50,12 +50,12 @@ mentions(n=15)   # my tags
 mentions(n=5)
 
 #for user - 
-(tweets = userTimeline("sumanmohanty", n=10))
+(tweets = userTimeline("realDonaldTrump", n=10))
 userTimeline("drisha_sinha", n=5)
 
 #------------------------------------
 ?userTimeline
-tweets = userTimeline("realDonaldTrump", n=100)
+tweets = userTimeline("Sowmya_sowms", n=10)
 #english
 tweets[1:5]
 n.tweet <- length(tweets)
@@ -102,3 +102,4 @@ head(category_senti2)
 
 #----
 table(category_senti)
+

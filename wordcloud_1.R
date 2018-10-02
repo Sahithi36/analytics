@@ -3,5 +3,6 @@
 library(wordcloud2) 
 
 # have a look to the example dataset
-head(demoFreq)
+demoFreq
+
 wordcloud2(demoFreq,size=1,shape='star')
